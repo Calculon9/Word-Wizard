@@ -1,7 +1,25 @@
+let words;
 
 $(document).ready(function(){
-    // Initialize 
-    letterBoxCreator()
+
+    // Fetch word list
+    
+    let req = new XMLHttpRequest();
+
+    req.open("GET","https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json")
+
+    req.onload = function(){
+        if(req.status == 200){
+            words = Object.keys(JSON.parse(req.responseText));
+
+        // Initialize 
+        letterBoxCreator()
+        } else (alert("Word list coul not be loaded"))
+    
+    }
+
+    req.send();
+    
 })
 
 // Callbacks
@@ -87,7 +105,9 @@ function randomGenerator(){
     return Math.round((Math.random() * (words.length - 1)));
 }
 
-let words = ['computer','chess','television','kitchen'];
+
+
+//let words = ['computer','chess','television','kitchen'];
 
 let randomIndex;
 

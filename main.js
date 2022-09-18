@@ -2,10 +2,8 @@ let words;
 let randomIndex;
 let currentWord;
 
-$(document).ready(function(){
-
-    // Fetch word list
-    
+ // Fetch word list upon page load
+$(document).ready(function(){   
     let req = new XMLHttpRequest();
 
     req.open("GET","https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json")

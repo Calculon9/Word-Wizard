@@ -1,4 +1,6 @@
 let words;
+let randomIndex;
+let currentWord;
 
 $(document).ready(function(){
 
@@ -14,12 +16,11 @@ $(document).ready(function(){
 
         // Initialize 
         letterBoxCreator()
-        } else (alert("Word list coul not be loaded"))
+        } else (alert("Word list could not be loaded"))
     
     }
 
-    req.send();
-    
+    req.send();    
 })
 
 // Callbacks
@@ -88,7 +89,10 @@ function gameFinished(){
                                </div>`);
         $('.game-over #game-over-score').text(streak);
         $('.game-over').fadeOut(0).fadeIn(300);
-        
+
+        // Reveal word
+        revealWord();
+
         // Add click event on 'Play again' button
         $('.game-over #play-again').click(function(){
             window.location.reload();
@@ -99,20 +103,12 @@ function gameFinished(){
     }
 }
 
-// Set up current word with empty letter-boxes
-
+// Random number generator
 function randomGenerator(){
     return Math.round((Math.random() * (words.length - 1)));
 }
 
-
-
-//let words = ['computer','chess','television','kitchen'];
-
-let randomIndex;
-
-let currentWord;
-
+// Selects a word randomly using randomGenerator
 function letterBoxCreator () {
     randomIndex = randomGenerator();
     currentWord = words[randomIndex];
@@ -120,6 +116,16 @@ function letterBoxCreator () {
         $('.word').append(`<div id="${letter}" class="letter-box center"><p class="word-letter"></p></div>`);
     })
     $('.word').fadeOut(0).fadeIn(400);
+}
+
+// Shows letters if the game was lost
+function revealWord () {
+    $('.word-letter').css('opacity','1');
+    let letterBoxes = $('.letter-box')
+    console.log(letterBoxes)
+    currentWord.split('').forEach((letter,i) => {
+        letterBoxes[i].firstElementChild.textContent = letter.toUpperCase();
+    })
 }
 
 

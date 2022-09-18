@@ -23,7 +23,7 @@ $(document).ready(function(){
     req.send();    
 })
 
-// Callbacks
+// Functions
 
 function gameFinished(){
     let word = $('.letter-box .word-letter').text();
